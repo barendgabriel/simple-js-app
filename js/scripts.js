@@ -16,3 +16,4 @@ pokemonList.push({
   height: 5,
   types: ['water'],
 });
+console.log(pokemonList);
