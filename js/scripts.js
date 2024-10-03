@@ -1,40 +1,49 @@
-let pokemonList = [];
-pokemonList.push({
+let pokemonRepository = (function () {
+  // Private pokemonList inside the IIFE
+  let pokemonList = [];
+
+  // Public function to add a Pokémon to the list
+  function add(pokemon) {
+    pokemonList.push(pokemon);
+  }
+
+  // Public function to get all Pokémon
+  function getAll() {
+    return pokemonList;
+  }
+
+  // Return the public functions to be accessible outside
+  return {
+    add: add,
+    getAll: getAll,
+  };
+})();
+
+// Add Pokémon to the repository using the add function
+pokemonRepository.add({
   name: 'Bulbasaur',
   height: 7,
   types: ['grass', 'poison'],
 });
 
-pokemonList.push({
+pokemonRepository.add({
   name: 'Charmander',
   height: 6,
   types: ['fire'],
 });
 
-pokemonList.push({
+pokemonRepository.add({
   name: 'Squirtle',
   height: 5,
   types: ['water'],
 });
-console.log(pokemonList);
-for (let i = 0; i < pokemonList.length; i++) {
-  // Get the current Pokémon
-  let pokemon = pokemonList[i];
 
-  // Define the threshold height
+// Use forEach() to iterate over the pokemonList and display the details
+pokemonRepository.getAll().forEach(function (pokemon) {
   let thresholdHeight = 6;
-
-  // Start with the basic output
   let output = `${pokemon.name} (height: ${pokemon.height})`;
-
-  // Check if the Pokémon's height is greater than the threshold
   if (pokemon.height > thresholdHeight) {
     output += " - Wow, that's big!";
   }
-
-  // Write the output to the DOM
   document.write(output + '<br>');
-}
-
-// Optional: Log the pokemonList to the console to check its contents
-console.log(pokemonList);
+});
