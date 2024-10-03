@@ -1,5 +1,25 @@
 let pokemonRepository = (function () {
-  let pokemonList = [];
+  let pokemonList = [
+    {
+      name: 'Bulbasaur',
+      height: 7,
+      types: ['grass', 'poison'],
+      detailsUrl: 'https://pokeapi.co/api/v2/pokemon/1/',
+    },
+    {
+      name: 'Charmander',
+      height: 6,
+      types: ['fire'],
+      detailsUrl: 'https://pokeapi.co/api/v2/pokemon/4/',
+    },
+    {
+      name: 'Squirtle',
+      height: 5,
+      types: ['water'],
+      detailsUrl: 'https://pokeapi.co/api/v2/pokemon/7/',
+    },
+  ];
+
   const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   // Fetch Pokémon from the API
@@ -49,6 +69,9 @@ let pokemonRepository = (function () {
 
   function showDetails(pokemon) {
     console.log(pokemon.name);
+    // You can also log other details if needed, e.g.:
+    // console.log(pokemon.height);
+    // console.log(pokemon.types);
     // Later, you'll add code here to show details (e.g., height, types) in a modal.
   }
 
