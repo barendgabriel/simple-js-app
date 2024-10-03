@@ -22,24 +22,19 @@ let pokemonRepository = (function () {
 
   const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-  // Fetch Pokémon from the API
   function loadList() {
     return fetch(apiUrl)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (json) {
-        json.results.forEach(function (item) {
+      .then((response) => response.json())
+      .then((json) => {
+        json.results.forEach((item) => {
           let pokemon = {
             name: item.name,
             detailsUrl: item.url,
           };
-          add(pokemon); // Add the Pokémon to the pokemonList
+          add(pokemon);
         });
       })
-      .catch(function (e) {
-        console.error(e);
-      });
+      .catch((e) => console.error(e));
   }
 
   function add(pokemon) {
@@ -50,7 +45,6 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
-  // Create list item
   function addListItem(pokemon) {
     let pokemonListElement = document.querySelector('.pokemon-list');
     let listItem = document.createElement('li');
@@ -61,31 +55,26 @@ let pokemonRepository = (function () {
     listItem.appendChild(button);
     pokemonListElement.appendChild(listItem);
 
-    // Add event listener to show details
-    button.addEventListener('click', function () {
+    button.addEventListener('click', () => {
       showDetails(pokemon);
     });
   }
 
   function showDetails(pokemon) {
     console.log(pokemon.name);
-    // You can also log other details if needed, e.g.:
-    // console.log(pokemon.height);
-    // console.log(pokemon.types);
-    // Later, you'll add code here to show details (e.g., height, types) in a modal.
   }
 
   return {
-    getAll: getAll,
-    add: add,
-    addListItem: addListItem,
-    loadList: loadList,
+    getAll,
+    add,
+    addListItem,
+    loadList,
   };
 })();
 
 // Load and display Pokémon
-pokemonRepository.loadList().then(function () {
-  pokemonRepository.getAll().forEach(function (pokemon) {
+pokemonRepository.loadList().then(() => {
+  pokemonRepository.getAll().forEach((pokemon) => {
     pokemonRepository.addListItem(pokemon);
   });
 });
