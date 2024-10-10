@@ -38,7 +38,7 @@ let pokemonRepository = (function () {
     let button = document.createElement('button');
 
     button.innerText = pokemon.name; // Set button text to Pokémon's name
-    button.classList.add('button-class'); // Add a class for styling
+    button.classList.add('pokemon-button'); // Add a class for styling
 
     // Add event listener to the button
     button.addEventListener('click', function () {
@@ -93,12 +93,51 @@ let pokemonRepository = (function () {
       });
   }
 
-  // Update showDetails() to load more information from the API
+  // Update showDetails() to load more information from the API and show modal
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
-      console.log(pokemon); // Log the Pokémon details after they are loaded
-      // Later, you can replace this with DOM manipulation to show details on the page
+      // Open the modal with Pokémon details
+      openModal(pokemon);
     });
+  }
+
+  // Function to open modal
+  function openModal(pokemon) {
+    let modal = document.getElementById('pokemonModal');
+    let modalName = document.getElementById('modal-pokemon-name');
+    let modalHeight = document.getElementById('modal-pokemon-height');
+    let modalImage = document.getElementById('modal-pokemon-image');
+
+    modalName.innerText = pokemon.name;
+    modalHeight.innerText = 'Height: ' + pokemon.height / 10 + ' m'; // Convert height to meters
+    modalImage.src = pokemon.imageUrl;
+
+    modal.style.display = 'block'; // Show the modal
+
+    // Close the modal when the close button is clicked
+    document.querySelector('.close-button').onclick = function () {
+      closeModal();
+    };
+
+    // Close the modal when clicking outside of it
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+
+    // Close the modal using the keyboard (Esc key)
+    window.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
+  }
+
+  // Function to close modal
+  function closeModal() {
+    let modal = document.getElementById('pokemonModal');
+    modal.style.display = 'none'; // Hide the modal
   }
 
   return {
