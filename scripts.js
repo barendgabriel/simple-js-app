@@ -2,6 +2,20 @@ let pokemonRepository = (function () {
   let repository = []; // Empty array to hold the Pokemon data
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150'; // URL for the API
 
+  function showLoadingMessage() {
+    let loadingDiv = document.createElement('div');
+    loadingDiv.classList.add('loading-message');
+    loadingDiv.innerText = 'Loading...'; // Text for loading message
+    document.body.appendChild(loadingDiv); // Append it to the body or a specific element
+  }
+
+  function hideLoadingMessage() {
+    let loadingDiv = document.querySelector('.loading-message');
+    if (loadingDiv) {
+      loadingDiv.remove(); // Remove the loading message from the DOM
+    }
+  }
+
   function add(pokemon) {
     if (
       typeof pokemon === 'object' &&
@@ -37,11 +51,13 @@ let pokemonRepository = (function () {
 
   // Function to load the initial list of Pokemon from the API
   function loadList() {
+    showLoadingMessage(); // Show loading message when fetching starts
     return fetch(apiUrl)
       .then(function (response) {
         return response.json();
       })
       .then(function (json) {
+        hideLoadingMessage(); // Hide loading message once the data is fetched
         json.results.forEach(function (item) {
           let pokemon = {
             name: item.name,
@@ -51,6 +67,7 @@ let pokemonRepository = (function () {
         });
       })
       .catch(function (e) {
+        hideLoadingMessage(); // Hide loading message if there’s an error
         console.error(e);
       });
   }
@@ -58,17 +75,20 @@ let pokemonRepository = (function () {
   // Function to load details of a specific Pokémon
   function loadDetails(pokemon) {
     let url = pokemon.detailsUrl;
+    showLoadingMessage(); // Show loading message when fetching starts
     return fetch(url)
       .then(function (response) {
         return response.json();
       })
       .then(function (details) {
+        hideLoadingMessage(); // Hide loading message once details are fetched
         // Now we add the details to the item
         pokemon.imageUrl = details.sprites.front_default;
         pokemon.height = details.height;
         pokemon.types = details.types.map((typeInfo) => typeInfo.type.name);
       })
       .catch(function (e) {
+        hideLoadingMessage(); // Hide loading message if there’s an error
         console.error(e);
       });
   }
