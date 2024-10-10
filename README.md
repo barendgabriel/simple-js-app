@@ -1,44 +1,39 @@
 Pokédex Project
 Overview
-This is a simple web application that displays a list of Pokémon and their details, including names, heights, and types. The app dynamically loads data from the free Pokémon API and displays an up-to-date list of Pokémon. Users can click on each Pokémon to see more detailed information.
+This is a simple web application that displays a list of Pokémon and their details, including their names, heights, and types. Users can interact with the app to view detailed information about each Pokémon in a modal window.
 
 Features
-Dynamic Pokémon List: The app loads Pokémon data from the Pokémon API, ensuring the list is always up to date.
-Detailed Pokémon Information: Displays the name, height, and types of each Pokémon.
-Click for Details: Users can click on any Pokémon to load and view additional information, such as an image and detailed stats.
-Loading Indicator: A loading message is displayed while data is being fetched from the API.
-API Integration: Uses fetch to retrieve data from the Pokémon API.
-Responsive Design: The Pokémon list dynamically updates based on the API data.
+Displays Pokémon List: The application shows a list of Pokémon names.
+Modal View: When a user clicks on a Pokémon's name, a modal opens, displaying the Pokémon's name, height, and an image.
+Responsive Design: The modal is designed to be responsive and works well on various screen sizes.
+Loading Indicators: A loading message is displayed while data is being fetched from the Pokémon API, ensuring users know when the app is processing.
 Pokémon Data
-Each Pokémon has a name, height, and a list of types.
-Bonus: Pokémon whose height exceeds a certain threshold (e.g., 6) are highlighted with a special message.
-How It Works
-API Integration: The app fetches data from the Pokémon API at PokéAPI and adds each Pokémon to the app's list dynamically.
-Event Listeners: Each Pokémon button has an event listener that, when clicked, loads the full details for the Pokémon, including an image and type information.
-Asynchronous Loading: The app uses JavaScript fetch to load Pokémon data asynchronously and display a loading message while waiting for data to be fetched.
-Conditional Logic: If a Pokémon's height is above a certain threshold, a special note ("Wow, that's big!") is displayed next to its name.
-Pokémon List Example
-The following is an example of Pokémon data displayed by the app:
+Each Pokémon has a name, height, and a list of types. The application pulls the latest Pokémon data from the Pokémon API, ensuring an up-to-date list of Pokémon.
 
-Bulbasaur: Height 7, Types: Grass, Poison — "Wow, that's big!"
-Charmander: Height 6, Types: Fire
-Squirtle: Height 5, Types: Water
-Pikachu: Height 0.3, Types: Electric
-Bonus Feature: Loading Indicator
-showLoadingMessage(): Displays a loading message while data is being fetched.
-hideLoadingMessage(): Hides the loading message once the data is retrieved.
-The loading indicator appears whenever the Pokémon list or details are being fetched from the API.
-Technologies Used
-JavaScript: Handles the dynamic fetching and rendering of Pokémon data.
-HTML/CSS: For structuring and styling the webpage.
-PokéAPI: Provides the external data source for Pokémon.
-How to Use
-Open the application in a browser.
-The list of Pokémon will automatically load from the Pokémon API.
-Click on any Pokémon to load additional details, such as an image and its height.
-The console will log the Pokémon details after loading (later you can display this in the UI).
+Pokémon List Example
+Here are some examples of Pokémon data displayed in the app:
+
+Bulbasaur: Height 7 decimeters (0.7 m), Types: Grass, Poison
+Charmander: Height 6 decimeters (0.6 m), Types: Fire
+Squirtle: Height 5 decimeters (0.5 m), Types: Water
+How It Works
+Data Loading:
+
+The app uses the Fetch API to load Pokémon data from the Pokémon API. A loading message appears while the data is being fetched.
+Array of Pokémon:
+
+A JavaScript array (pokemonList) holds the data for each Pokémon. Each object in the array contains the Pokémon's name, height, and types.
+Event Listeners:
+
+Each Pokémon button has an event listener that triggers the modal to display the Pokémon’s details when clicked.
+Modal Functionality:
+
+The modal displays the Pokémon's name, height (converted to meters), and an image. The modal can be closed by clicking a close button, clicking outside the modal, or pressing the Escape key.
+Responsive Design:
+
+The modal is tested for functionality on smaller screens, ensuring a seamless user experience.
 About
-This project was created as part of the CareerFoundry course to demonstrate the integration of external APIs in a JavaScript web application.
+This project is a simple yet interactive application showcasing Pokémon data using JavaScript, HTML, and CSS.
 
 Resources
-PokéAPI: https://pokeapi.co/
+Pokémon API
