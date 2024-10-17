@@ -3,7 +3,9 @@
   <head>
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
     />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,53 +16,65 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">Pokédex</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Pokémon List
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div class="pokemon-list"></div>
+              <!-- Pokémon list will be dynamically added here -->
+            </div>
+          </li>
+        </ul>
+      </div>
     </nav>
 
-    <div class="container mt-4">
-      <h1>Pokédex</h1>
-      <ul class="list-group pokemon-list"></ul>
-      <!-- Updated with Bootstrap class -->
-
-      <!-- Modal Structure (Bootstrap) -->
-      <div
-        id="pokemonModal"
-        class="modal fade"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="modalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalLabel">Pokémon Details</h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <h2 id="modal-pokemon-name"></h2>
-              <p id="modal-pokemon-height"></p>
-              <img
-                id="modal-pokemon-image"
-                src=""
-                alt="Pokémon Image"
-                class="img-fluid"
-              />
-            </div>
-          </div>
-        </div>
+    <!-- Modal Structure -->
+    <div id="pokemonModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2 id="modal-pokemon-name"></h2>
+        <p id="modal-pokemon-height"></p>
+        <img id="modal-pokemon-image" src="" alt="Pokémon Image" />
       </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="scripts.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rTAlY8W9ILjx+1lLDbfA8DhxovXn8L3Dq40foq1LgNHqTPQ4Hjm"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-JZ6Spejh4G9p/1l0A6eD5S1LtwW1wO1L0A5P/5I5z4Nw2t5pK5l0XcEwT0o/aC6h"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-6J8f1SKcVCK9x4qI7wvF4oP4S2g6mX8S6r/6j6XDbk6+62MBF+P/N0N20D4wE7D2"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
