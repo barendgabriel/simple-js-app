@@ -1,25 +1,13 @@
-body {
-  font-family: Arial, sans-serif;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin: 10px 0;
-}
+/* styles.css */
 
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1000; /* Sit on top */
-  left: 0;
+  position: fixed;
+  z-index: 1000; /* Make sure it is above all other content */
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scrolling if needed */
 }
 
 .modal-overlay {
@@ -42,30 +30,11 @@ li {
 }
 
 .close-button {
-  color: #aaa;
-  float: right;
-  font-size: 30px; /* Size of close button */
   cursor: pointer; /* Change cursor on hover */
+  float: right; /* Position the close button */
+  font-size: 30px; /* Size of close button */
 }
 
 .close-button:hover {
   color: red; /* Change color on hover */
-}
-
-button.pokemon-button {
-  background-color: #f2f2f2;
-  border: 1px solid #ccc;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button.pokemon-button:hover {
-  background-color: #ddd;
-}
-
-#modal-pokemon-image {
-  max-width: 100%; /* Responsive image */
-  height: auto;
-  margin-top: 10px; /* Space above the image */
 }
