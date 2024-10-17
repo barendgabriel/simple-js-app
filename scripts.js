@@ -1,5 +1,5 @@
 let pokemonRepository = (function () {
-  let repository = []; // Empty array to hold the Pokémon data
+  let repository = []; // Empty array to hold the Pokemon data
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150'; // URL for the API
 
   function showLoadingMessage() {
@@ -24,7 +24,7 @@ let pokemonRepository = (function () {
     ) {
       repository.push(pokemon);
     } else {
-      console.log('Pokémon is not correct');
+      console.log('Pokemon is not correct');
     }
   }
 
@@ -33,22 +33,26 @@ let pokemonRepository = (function () {
   }
 
   function addListItem(pokemon) {
-    let dropdownMenu = document.querySelector('.pokemon-list');
+    let pokemonList = document.querySelector('.pokemon-list');
+    let listItem = document.createElement('li');
+    listItem.classList.add('list-group-item'); // Bootstrap list-group-item class
 
-    // Create a new list item for the Pokémon
-    let listItem = document.createElement('a');
-    listItem.classList.add('dropdown-item');
-    listItem.innerText = pokemon.name;
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('btn', 'btn-primary'); // Bootstrap button classes
+    button.setAttribute('data-toggle', 'modal'); // For Bootstrap modal functionality
+    button.setAttribute('data-target', '#pokemonModal'); // Reference to the modal ID
 
-    // Add event listener to the list item
-    listItem.addEventListener('click', function () {
-      showDetails(pokemon); // Call showDetails when the item is clicked
+    // Add event listener to the button
+    button.addEventListener('click', function () {
+      showDetails(pokemon); // Call showDetails when button is clicked
     });
 
-    dropdownMenu.appendChild(listItem); // Append list item to the dropdown menu
+    listItem.appendChild(button); // Append button to the list item
+    pokemonList.appendChild(listItem); // Append list item to the Pokémon list
   }
 
-  // Function to load the initial list of Pokémon from the API
+  // Function to load the initial list of Pokemon from the API
   function loadList() {
     showLoadingMessage(); // Show loading message when fetching starts
     return fetch(apiUrl)
@@ -111,32 +115,14 @@ let pokemonRepository = (function () {
     modalHeight.innerText = 'Height: ' + pokemon.height / 10 + ' m'; // Convert height to meters
     modalImage.src = pokemon.imageUrl;
 
-    modal.style.display = 'block'; // Show the modal
-
-    // Close the modal when the close button is clicked
-    document.querySelector('.close-button').onclick = function () {
-      closeModal();
-    };
-
-    // Close the modal when clicking outside of it
-    window.onclick = function (event) {
-      if (event.target === modal) {
-        closeModal();
-      }
-    };
-
-    // Close the modal using the keyboard (Esc key)
-    window.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
-        closeModal();
-      }
-    });
+    // Use Bootstrap's modal show method
+    $(modal).modal('show');
   }
 
-  // Function to close modal
+  // Function to close modal (handled by Bootstrap)
   function closeModal() {
     let modal = document.getElementById('pokemonModal');
-    modal.style.display = 'none'; // Hide the modal
+    $(modal).modal('hide'); // Use Bootstrap's modal hide method
   }
 
   return {
