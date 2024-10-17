@@ -113,18 +113,13 @@ let pokemonRepository = (function () {
 
     modalName.innerText = pokemon.name;
     modalHeight.innerText = 'Height: ' + pokemon.height / 10 + ' m'; // Convert height to meters
-    modalImage.src = pokemon.imageUrl;
+    modalImage.src = pokemon.imageUrl || 'placeholder.png'; // Set image or a default
 
-    // Use Bootstrap's modal show method
+    // Show modal using Bootstrap's modal method
     $(modal).modal('show');
   }
 
-  // Function to close modal (handled by Bootstrap)
-  function closeModal() {
-    let modal = document.getElementById('pokemonModal');
-    $(modal).modal('hide'); // Use Bootstrap's modal hide method
-  }
-
+  // Return public functions
   return {
     add: add,
     getAll: getAll,
