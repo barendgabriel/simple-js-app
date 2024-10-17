@@ -11,6 +11,47 @@ li {
   margin: 10px 0;
 }
 
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+}
+
+.modal-content {
+  position: relative; /* Position relative for content */
+  margin: 15% auto; /* Center the modal */
+  padding: 20px;
+  width: 80%; /* Width of modal */
+  background: white; /* Background of modal content */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow for modal */
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 30px; /* Size of close button */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.close-button:hover {
+  color: red; /* Change color on hover */
+}
+
 button.pokemon-button {
   background-color: #f2f2f2;
   border: 1px solid #ccc;
@@ -21,43 +62,6 @@ button.pokemon-button {
 
 button.pokemon-button:hover {
   background-color: #ddd;
-}
-
-/* Modal Styles */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-  max-width: 600px; /* Max width of modal */
-  border-radius: 8px; /* Rounded corners */
-}
-
-.close-button {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close-button:hover,
-.close-button:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
 }
 
 #modal-pokemon-image {
