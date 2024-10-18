@@ -1,138 +1,76 @@
-let pokemonRepository = (function () {
-  let repository = []; // Empty array to hold the Pokemon data
-  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150'; // URL for the API
+/* General Body Styling */
+body {
+  background: linear-gradient(135deg, #ffcc33, #ff66ff);
+  font-family: 'Arial', sans-serif; /* Using a safe fallback for font in case Press Start 2P isn't loaded */
+  padding: 20px;
+  margin: 0;
+  box-sizing: border-box; /* Ensures padding/margin are handled more predictably */
+}
 
-  function showLoadingMessage() {
-    let loadingDiv = document.createElement('div');
-    loadingDiv.classList.add('loading-message');
-    loadingDiv.innerText = 'Loading...'; // Text for loading message
-    document.body.appendChild(loadingDiv); // Append it to the body or a specific element
-  }
+/* Pokémon List Styling */
+.pokemon-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 equal columns */
+  gap: 20px; /* Adds space between each card */
+  padding: 20px;
+  list-style: none; /* Remove any default list styling */
+  margin: 0; /* Reset margin */
+}
 
-  function hideLoadingMessage() {
-    let loadingDiv = document.querySelector('.loading-message');
-    if (loadingDiv) {
-      loadingDiv.remove(); // Remove the loading message from the DOM
-    }
-  }
+/* Pokémon Item/Card Styling */
+.pokemon-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds a soft shadow */
+  text-align: center; /* Ensure content inside the card is centered */
+}
 
-  function add(pokemon) {
-    if (
-      typeof pokemon === 'object' &&
-      'name' in pokemon &&
-      'detailsUrl' in pokemon
-    ) {
-      repository.push(pokemon);
-    } else {
-      console.log('Pokemon is not correct');
-    }
-  }
+/* Hover Effect for Pokémon Card */
+.pokemon-item:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add a bigger shadow on hover */
+}
 
-  function getAll() {
-    return repository;
-  }
+/* Button Styling */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-block; /* Ensures button acts as a block element */
+}
 
-  function addListItem(pokemon) {
-    let pokemonList = document.querySelector('.pokemon-list');
-    let listItem = document.createElement('li');
-    listItem.classList.add('list-group-item'); // Bootstrap list-group-item class
+/* Alternating Button Colors */
+button:nth-child(odd) {
+  background-color: #f67280; /* Pink color for odd buttons */
+  color: white;
+}
 
-    let button = document.createElement('button');
-    button.innerText = pokemon.name;
-    button.classList.add('btn', 'btn-primary'); // Bootstrap button classes
-    button.setAttribute('data-toggle', 'modal'); // For Bootstrap modal functionality
-    button.setAttribute('data-target', '#pokemonModal'); // Reference to the modal ID
+button:nth-child(even) {
+  background-color: #355c7d; /* Blue color for even buttons */
+  color: white;
+}
 
-    // Add event listener to the button
-    button.addEventListener('click', function () {
-      showDetails(pokemon); // Call showDetails when button is clicked
-    });
+/* Button Hover Effects */
+button:hover {
+  transform: translateY(-5px); /* Slightly lifts the button */
+  background-color: #333; /* Darker background on hover */
+  color: white; /* White text color on hover */
+}
 
-    listItem.appendChild(button); // Append button to the list item
-    pokemonList.appendChild(listItem); // Append list item to the Pokémon list
-  }
+/* Ensures proper box-sizing across elements */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 
-  // Function to load the initial list of Pokemon from the API
-  function loadList() {
-    showLoadingMessage(); // Show loading message when fetching starts
-    return fetch(apiUrl)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (json) {
-        hideLoadingMessage(); // Hide loading message once the data is fetched
-        json.results.forEach(function (item) {
-          let pokemon = {
-            name: item.name,
-            detailsUrl: item.url, // Store the URL for further details
-          };
-          add(pokemon); // Use the add() function to add to the repository
-        });
-      })
-      .catch(function (e) {
-        hideLoadingMessage(); // Hide loading message if there’s an error
-        console.error(e);
-      });
-  }
-
-  // Function to load details of a specific Pokémon
-  function loadDetails(pokemon) {
-    let url = pokemon.detailsUrl;
-    showLoadingMessage(); // Show loading message when fetching starts
-    return fetch(url)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (details) {
-        hideLoadingMessage(); // Hide loading message once details are fetched
-        // Now we add the details to the item
-        pokemon.imageUrl = details.sprites.front_default;
-        pokemon.height = details.height;
-        pokemon.types = details.types.map((typeInfo) => typeInfo.type.name);
-      })
-      .catch(function (e) {
-        hideLoadingMessage(); // Hide loading message if there’s an error
-        console.error(e);
-      });
-  }
-
-  // Update showDetails() to load more information from the API and show modal
-  function showDetails(pokemon) {
-    loadDetails(pokemon).then(function () {
-      // Open the modal with Pokémon details
-      openModal(pokemon);
-    });
-  }
-
-  // Function to open modal
-  function openModal(pokemon) {
-    let modal = document.getElementById('pokemonModal');
-    let modalName = document.getElementById('modal-pokemon-name');
-    let modalHeight = document.getElementById('modal-pokemon-height');
-    let modalImage = document.getElementById('modal-pokemon-image');
-
-    modalName.innerText = pokemon.name;
-    modalHeight.innerText = 'Height: ' + pokemon.height / 10 + ' m'; // Convert height to meters
-    modalImage.src = pokemon.imageUrl || 'placeholder.png'; // Set image or a default
-
-    // Show modal using Bootstrap's modal method
-    $(modal).modal('show');
-  }
-
-  // Return public functions
-  return {
-    add: add,
-    getAll: getAll,
-    addListItem: addListItem,
-    loadList: loadList, // Expose loadList
-    loadDetails: loadDetails, // Expose loadDetails
-  };
-})();
-
-// Call the loadList function to load Pokémon from the API
-pokemonRepository.loadList().then(function () {
-  // Now the data is loaded, you can loop through and display it
-  pokemonRepository.getAll().forEach(function (pokemon) {
-    pokemonRepository.addListItem(pokemon);
-  });
-});
+/* Ensuring the use of fallback fonts for more robust rendering */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Including the custom font if you want to use it */
+body {
+  font-family: 'Press Start 2P', cursive, 'Arial', sans-serif; /* Uses the custom font with a fallback */
+}
