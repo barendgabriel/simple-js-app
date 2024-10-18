@@ -15,6 +15,7 @@ let pokemonRepository = (function () {
       loadingDiv.remove(); // Remove the loading message from the DOM
     }
   }
+  le;
 
   function add(pokemon) {
     if (
